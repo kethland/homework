@@ -6,9 +6,8 @@ import (
 
 func main() {
 	r := mux.NewRouter()
-    r.HandleFunc("/", HomeHandler)
-    r.HandleFunc("/products", ProductsHandler)
-    r.HandleFunc("/articles", ArticlesHandler)
-    http.Handle("/", r)
+	r.HandleFunc("/products/{key}", ProductHandler)
+	r.HandleFunc("/articles/{category}/", ArticlesCategoryHandler)
+	r.HandleFunc("/articles/{category}/{id:[0-9]+}", ArticleHandler)
 }
 
