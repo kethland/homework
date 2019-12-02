@@ -1,9 +1,18 @@
 package main
 
 import (
+	"github.com/abice/go-enum/generator/assets"
+	"os"
+	"net/http"	
+	"fmt"
 	"github.com/gorilla/mux"
+	"html/template"
+	"time"
+	"os/signal"
+	"context"
 )
 
+//var HTMLServer server
 var navigationBarHTML string
 var homepageTpl *template.Template
 var secondViewTpl *template.Template
@@ -16,6 +25,7 @@ func main() {
 		ReadTimeout:  5 * time.Second,
 		WriteTimeout: 5 * time.Second,
 	}
+	
 	htmlServer := Start(serverCfg)
 	defer htmlServer.Stop()
 
@@ -32,11 +42,12 @@ func init() {
 	homepageHTML := assets.MustAssetString("templates/index.html")
 	homepageTpl = template.Must(template.New("homepage_view").Parse(homepageHTML))
 
-	secondViewHTML := assets.MustAssetString("templates/second_view.html")
-	secondViewTpl = template.Must(template.New("second_view").Parse(secondViewHTML))
-	thirdViewFuncMap := ThirdViewFormattingFuncMap()
-	thirdViewHTML := assets.MustAssetString("templates/third_view.html")
-	thirdViewTpl = template.Must(template.New("third_view").Funcs(thirdViewFuncMap).Parse(thirdViewHTML))
+//	secondViewHTML := assets.MustAssetString("templates/second_view.html")
+//	secondViewTpl = template.Must(template.New("second_view").Parse(secondViewHTML))
+//	
+//	thirdViewFuncMap := ThirdViewFormattingFuncMap()
+//	thirdViewHTML := assets.MustAssetString("templates/third_view.html")
+//	thirdViewTpl = template.Must(template.New("third_view").Funcs(thirdViewFuncMap).Parse(thirdViewHTML))
 
 }
 
