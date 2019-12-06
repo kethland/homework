@@ -179,7 +179,7 @@ import (
     "log"
 )
 
-var tmpl = template.Must(template.ParseGlob("templates/*.html"))
+var tmpl = template.Must(template.ParseGlob("../templates/*.html"))
 
 type Page struct {
     NavigationBar string
