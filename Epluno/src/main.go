@@ -124,7 +124,7 @@
 //	render(w, r, homepageTpl, "homepage_view", fullData)
 //}
 //
-//// SecondHandler renders the second view template
+// SecondHandler renders the second view template
 //func SecondHandler(w http.ResponseWriter, r *http.Request) {
 //	push(w, "/static/style.css", "style")
 //	push(w, "/static/navigation_bar.css", "style")
@@ -177,6 +177,7 @@ import (
     "fmt"
     "html/template"
     "log"
+//    "rsc.io/quote"	
 )
 
 var tmpl = template.Must(template.ParseGlob("../templates/*.html"))
@@ -188,7 +189,7 @@ type Page struct {
 func main() {
     router := mux.NewRouter()
     router.HandleFunc("/", HomeHandler)
-    //router.HandleFunc("/second", SecondHandler)
+    router.HandleFunc("/second", SecondHandler)
     //router.HandleFunc("/third/{number}", ThirdHandler)
     //router.PathPrefix("/static/").Handler(http.StripPrefix("/static/", http.FileServer(http.Dir("./static"))))
 
@@ -204,6 +205,15 @@ func HomeHandler(w http.ResponseWriter, r *http.Request) {
     log.Println("Home Page Invoked.")
     p := Page{NavigationBar: `Test Navigation`}
     err := tmpl.ExecuteTemplate(w, "HomeHandler.html", p)
+    if err != nil {
+        log.Fatal("Cannot Get View ", err)
+    }
+}
+
+func SecondHandler(w http.ResponseWriter, r *http.Request) {
+    log.Println("Second Page Invoked.")
+    p := Page{NavigationBar: `Test Navigation`}
+    err := tmpl.ExecuteTemplate(w, "SecondView.html", p)
     if err != nil {
         log.Fatal("Cannot Get View ", err)
     }
