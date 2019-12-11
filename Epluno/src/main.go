@@ -177,7 +177,6 @@ import (
     "fmt"
     "html/template"
     "log"
-//    "rsc.io/quote"	
 )
 
 var tmpl = template.Must(template.ParseGlob("../templates/*.html"))
