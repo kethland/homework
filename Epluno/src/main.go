@@ -203,7 +203,7 @@ func main() {
 
 func HomeHandler(w http.ResponseWriter, r *http.Request) {
     log.Println("Home Page Invoked.")
-    p := Page{NavigationBar: `Test Navigation`}
+    p := Page{NavigationBar: `Home`}
     err := tmpl.ExecuteTemplate(w, "HomeHandler.html", p)
     if err != nil {
         log.Fatal("Cannot Get View ", err)
@@ -212,7 +212,7 @@ func HomeHandler(w http.ResponseWriter, r *http.Request) {
 
 func SecondHandler(w http.ResponseWriter, r *http.Request) {
     log.Println("Second Page Invoked.")
-    p := Page{NavigationBar: `Test Navigation`}
+    p := Page{NavigationBar: `Second Page`}
     err := tmpl.ExecuteTemplate(w, "SecondView.html", p)
     if err != nil {
         log.Fatal("Cannot Get View ", err)
