@@ -181,11 +181,20 @@ import (
 
 var tmpl = template.Must(template.ParseGlob("../templates/*.html"))
 
+type serverConfig struct  {
+		host string      
+		readTimeout int  
+		writeTimeout int 
+}
+
 type Page struct {
     NavigationBar string
 }
 
-func main() {
+func main() { 
+	
+	var config = ServerConfig("localhost:8080")
+	
     router := mux.NewRouter()
     router.HandleFunc("/", HomeHandler)
     router.HandleFunc("/second", SecondHandler)
@@ -198,6 +207,16 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
+    
+}
+
+func ServerConfig(string host) *serverConfig{
+
+	config := serverConfig{host: host}
+	config.readTimeout = 5 * time.Second
+	config.writeTimeout = 5 * time.Second
+	
+	return &config
 }
 
 func HomeHandler(w http.ResponseWriter, r *http.Request) {
@@ -216,4 +235,7 @@ func SecondHandler(w http.ResponseWriter, r *http.Request) {
     if err != nil {
         log.Fatal("Cannot Get View ", err)
     }
+    
 }
+
+
