@@ -6,14 +6,15 @@ import (
     "fmt"
     "html/template"
     "log"
+    "time"
 )
 
 var tmpl = template.Must(template.ParseGlob("../templates/*.html"))
 
 type serverConfig struct  {
 		host string      
-		readTimeout int  
-		writeTimeout int 
+		readTimeout time.Duration  
+		writeTimeout time.Duration
 }
 
 type Page struct {
@@ -22,7 +23,7 @@ type Page struct {
 
 func main() { 
 	
-	var config = ServerConfig("localhost:8080")
+	ServerConfig("localhost:8080")
 	
     router := mux.NewRouter()
     router.HandleFunc("/", HomeHandler)
@@ -39,7 +40,7 @@ func main() {
     
 }
 
-func ServerConfig(string host) *serverConfig{
+func ServerConfig(host string) *serverConfig{
 
 	config := serverConfig{host: host}
 	config.readTimeout = 5 * time.Second
